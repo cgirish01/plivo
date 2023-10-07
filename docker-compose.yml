@@ -2,11 +2,9 @@ version: '3.8'
 
 services:
   web:
-    image: webapi101:v1.0
-    command: >
-      bash -c "while ! nc -z db 5432; do sleep 1; done;
-               python manage.py migrate;
-               gunicorn message_service.wsgi:application --bind 0.0.0.0:8000"
+    image: plivoapi:v2.1
+    entrypoint: ["/app/entrypoint.sh"]
+    #command: ["gunicorn", "messageService.wsgi:application", "--bind", "0.0.0.0:8000"]
     volumes:
       - .:/app
     ports:

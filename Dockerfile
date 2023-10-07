@@ -5,6 +5,7 @@ FROM python:3.9-slim-buster
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+
 # Set the working directory in the container to /app
 WORKDIR /app
 
@@ -12,6 +13,9 @@ WORKDIR /app
 COPY . /app/
 
 # Install required packages
+
+RUN apt-get update && apt-get install -y netcat && apt-get clean
+
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 

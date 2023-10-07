@@ -22,6 +22,6 @@ def handler404(request, exception):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('messages/', include('messages.urls'))
+    path('', include('messagess.urls'))
 ]
 handler404 = handler404
