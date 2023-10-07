@@ -1,5 +1,5 @@
 """
-URL configuration for messageService project.
+URL configuration for message_service project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -15,8 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.http import JsonResponse
+from django.urls import include, path
+def handler404(request, exception):
+    return JsonResponse({"error": "Not found"}, status=404)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('messages/', include('messages.urls'))
 ]
+handler404 = handler404
