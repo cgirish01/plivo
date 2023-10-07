@@ -59,6 +59,13 @@ def get_messages(request, account_id):
 
 #     return JsonResponse({'messages': message_data})
 
+# 
+import logging
+
+logger = logging.getLogger(__name__)
+
+# Define your view functions here
+
 def search_messages(request):
     message_ids = request.GET.get('message_id', '').split(',')
     sender_numbers = request.GET.get('sender_number', '').split(',')
@@ -68,12 +75,15 @@ def search_messages(request):
 
     if message_ids and message_ids[0]:  # check if list is not empty
         query &= Q(message_id__in=message_ids)
+        logger.info(f"Filtering messages by message_id: {message_ids}")
     
     if sender_numbers and sender_numbers[0]:  # check if list is not empty
         query &= Q(sender_number__in=sender_numbers)
+        logger.info(f"Filtering messages by sender_number: {sender_numbers}")
     
     if receiver_numbers and receiver_numbers[0]:  # check if list is not empty
         query &= Q(receiver_number__in=receiver_numbers)
+        logger.info(f"Filtering messages by receiver_number: {receiver_numbers}")
 
     messages = Message.objects.filter(query)
 
@@ -86,8 +96,7 @@ def search_messages(request):
         for message in messages
     ]
 
+    logger.info(f"Returning {len(message_data)} messages")
     return JsonResponse({'messages': message_data})
-
-
 def lol(request):
     return "lol"

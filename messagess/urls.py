@@ -5,7 +5,7 @@ from .views import MessageViewSet, create_message, get_messages, lol, search_mes
 
 router = DefaultRouter()
 router.register(r'get/messages/(?P<account_id>\d+)', MessageViewSet)
-router.register(r'search', MessageViewSet)
+#router.register(r'search', MessageViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
