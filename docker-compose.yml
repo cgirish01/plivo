@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: plivoapi:v2.5
+    image: shadowx01/plivoapi:v2.6.linux
     entrypoint: ["/app/entrypoint.sh"]
     #command: ["gunicorn", "messageService.wsgi:application", "--bind", "0.0.0.0:8000"]
     volumes:
